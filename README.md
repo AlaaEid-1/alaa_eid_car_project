@@ -1,4 +1,4 @@
-# 🚗 CarExplorer - Professional Car Discovery Platform
+# 🚗 Alaa Eid Car Project - Professional Car Discovery Platform
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.0-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
@@ -8,6 +8,20 @@
 [![Vercel](https://img.shields.io/badge/Vercel-Deployed-black)](https://vercel.com/)
 
 A modern, full-stack car exploration platform built with cutting-edge technologies. Discover, compare, and connect with fellow car enthusiasts through an intuitive interface featuring real-time chat, advanced search, and comprehensive car information.
+
+**Repository**: [https://github.com/AlaaEid-1/alaa_eid_car_project](https://github.com/AlaaEid-1/alaa_eid_car_project)
+
+## 📋 Table of Contents
+- [✨ Key Features](#-key-features)
+- [🛠️ Technology Stack](#️-technology-stack)
+- [🚀 Quick Start](#-quick-start)
+- [📡 API Reference](#-api-reference)
+- [🧪 Testing the APIs](#-testing-the-apis)
+- [🏗️ Project Architecture](#️-project-architecture)
+- [🚀 Deployment](#-deployment)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [🙏 Acknowledgments](#-acknowledgments)
 
 ## ✨ Key Features
 
@@ -68,8 +82,8 @@ A modern, full-stack car exploration platform built with cutting-edge technologi
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/car-explorer.git
-   cd car-explorer
+   git clone https://github.com/AlaaEid-1/alaa_eid_car_project.git
+   cd alaa_eid_car_project
    ```
 
 2. **Install Dependencies**
@@ -122,9 +136,9 @@ DELETE /api/cars/[id]         # Remove car
 
 ### User Features
 ```http
-GET    /api/favorites         # Get user's favorite cars
+GET    /api/favorites?userId={userId}    # Get user's favorite cars
 POST   /api/favorites         # Add car to favorites
-DELETE /api/favorites/[id]    # Remove from favorites
+DELETE /api/favorites?userId={userId}&carId={carId}    # Remove from favorites
 
 POST   /api/test-drives        # Schedule test drive
 GET    /api/test-drives        # Get test drive bookings
@@ -133,14 +147,92 @@ GET    /api/test-drives        # Get test drive bookings
 ### Communication
 ```http
 POST   /api/chatbot           # AI-powered chat responses
-GET    /api/reviews/[carId]   # Get car reviews
+GET    /api/reviews/[carId]   # Get car reviews for specific car
 POST   /api/reviews           # Submit car review
+GET    /api/reviews           # Get all reviews from all cars
 ```
+
+## 🧪 Testing the APIs
+
+### Testing with Postman or cURL
+
+1. **Get All Cars**
+   ```bash
+   curl http://localhost:3000/api/cars
+   ```
+
+2. **Get Cars with Filtering**
+   ```bash
+   curl "http://localhost:3000/api/cars?type=SUV&priceMin=20000&priceMax=50000"
+   ```
+
+3. **Get Specific Car**
+   ```bash
+   curl http://localhost:3000/api/cars/68fb27e1e3dd58d2f0da440d
+   ```
+
+4. **Create New Car**
+   ```bash
+   curl -X POST http://localhost:3000/api/cars \
+     -H "Content-Type: application/json" \
+     -d '{
+       "name": "Test Car",
+       "brand": "Test Brand",
+       "model": "Test Model",
+       "year": 2024,
+       "price": 30000,
+       "type": "Sedan",
+       "description": "A test car",
+       "images": ["/images/cars/test.jpg"],
+       "specifications": {
+         "engine": "2.0L",
+         "horsepower": 200,
+         "transmission": "Automatic"
+       }
+     }'
+   ```
+
+5. **Get User Favorites**
+   ```bash
+   curl "http://localhost:3000/api/favorites?userId=guest"
+   ```
+
+6. **Add to Favorites**
+   ```bash
+   curl -X POST http://localhost:3000/api/favorites \
+     -H "Content-Type: application/json" \
+     -d '{
+       "userId": "guest",
+       "carId": "68fb27e1e3dd58d2f0da440d"
+     }'
+   ```
+
+7. **Get All Reviews**
+   ```bash
+   curl http://localhost:3000/api/reviews
+   ```
+
+8. **Get Reviews for Specific Car**
+   ```bash
+   curl http://localhost:3000/api/reviews/68fb27e1e3dd58d2f0da440d
+   ```
+
+9. **Submit Review**
+   ```bash
+   curl -X POST http://localhost:3000/api/reviews \
+     -H "Content-Type: application/json" \
+     -d '{
+       "carId": "68fb27e1e3dd58d2f0da440d",
+       "user": "Test User",
+       "rating": 5,
+       "comment": "Great car!"
+     }'
+   ```
 
 ## 🏗️ Project Architecture
 
 ```
-car-explorer/
+alaa_eid_car_project/
 ├── 📁 app/                          # Next.js App Router
 │   ├── 📁 api/                      # API routes
 │   │   ├── 📁 cars/                 # Car management endpoints
