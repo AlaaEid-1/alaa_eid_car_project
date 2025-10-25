@@ -99,7 +99,7 @@ A modern, full-stack car exploration platform built with cutting-edge technologi
    Configure your `.env.local` file:
    ```env
    # Database
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/car-explorer?retryWrites=true&w=majority
+   MONGODB_URI=your link mongodb data base 
 
    # Real-time Chat
    ABLY_API_KEY=your-ably-api-key-here
